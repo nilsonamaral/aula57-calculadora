@@ -1,9 +1,22 @@
 function criaCalculadora() {
     return {
-        display: document.querySelector('.diplay'),
+        display: document.querySelector('.display'),
 
         inicia() {
             this.cliqueBotoes();
+            this.pressionaEnter();
+        },
+
+        realizaConta() {
+            let conta = this.display.value;
+        },
+
+        pressionaEnter() {
+            this.display.addEventListener('keyup', e => {
+                if(e.keyCode === 13) {
+                    this.realizaConta();
+                }
+            });
         },
 
         clearDisplay() {
@@ -24,10 +37,12 @@ function criaCalculadora() {
                     alert('Conta Inválida');
                     return;
                 }
+                this.display.value = String(conta);
             }
                catch(e) {
-
-                }
+                alert('Conta Inválida');
+                return;
+            }
         },
 
         cliqueBotoes() {
